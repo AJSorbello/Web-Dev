@@ -1,4 +1,6 @@
 from django.db import models
+from django.shortcuts import reverse
+
 
 # Define choices for genre and book type
 genre_choices = (
@@ -25,6 +27,10 @@ class Book(models.Model):
     book_type = models.CharField(
         max_length=12, choices=book_type_choices, default="hardcover"
     )
+    pic = models.ImageField(upload_to="books", default="no_picture.jpg")
 
     def __str__(self):
         return str(self.name)
+
+    def get_absolute_url(self):
+        return reverse("books:detail", kwargs={"pk": self.pk})
