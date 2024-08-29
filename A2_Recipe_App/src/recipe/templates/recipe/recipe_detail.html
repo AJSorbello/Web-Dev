@@ -8,8 +8,21 @@
     <link rel="stylesheet" href="{% static 'styles.css' %}" />
   </head>
   <body>
+    <header>
+      <h1>{{ recipe.name }}</h1>
+    </header>
     <div class="recipe-details">
-      <h2>{{ recipe.name }}</h2>
+      <!-- Image Display -->
+      <div class="image-wrapper">
+        {% if recipe.image %}
+        <img src="{{ recipe.image.url }}" alt="{{ recipe.name }}" />
+        {% else %}
+        <img
+          src="{% static 'default_recipe_image.jpg' %}"
+          alt="Default Image" />
+        {% endif %}
+      </div>
+
       <p>Cooking Time: {{ recipe.cooking_time }} minutes</p>
       <p>Difficulty: {{ recipe.difficulty }}</p>
 
@@ -24,6 +37,13 @@
 
       <h3>Instructions:</h3>
       <p>{{ recipe.instructions }}</p>
+
+      <!-- Back to All Recipes Button -->
+      <div class="back-button-container">
+        <a href="{% url 'recipe:recipe_list' %}" class="back-button"
+          >Back to All Recipes</a
+        >
+      </div>
     </div>
   </body>
 </html>
