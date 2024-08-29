@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ recipe.name }}</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+  </head>
+  <body>
+    <div class="recipe-details">
+      <h2>{{ recipe.name }}</h2>
+      <p>Cooking Time: {{ recipe.cooking_time }} minutes</p>
+      <p>Difficulty: {{ recipe.difficulty }}</p>
+
+      <h3>Ingredients:</h3>
+      <ul>
+        {% for ingredient in recipe.ingredient_set.all %}
+        <li>
+          {{ ingredient.quantity }} {{ ingredient.unit }} {{ ingredient.name }}
+        </li>
+        {% endfor %}
+      </ul>
+
+      <h3>Instructions:</h3>
+      <p>{{ recipe.instructions }}</p>
+    </div>
+  </body>
+</html>
