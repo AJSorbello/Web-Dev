@@ -11,7 +11,7 @@
     <header>
       <h1>{{ recipe.name }}</h1>
     </header>
-    <div class="recipe-details">
+    <div class="welcome-container recipe-details">
       <!-- Image Display -->
       <div class="image-wrapper">
         {% if recipe.image %}
@@ -23,17 +23,25 @@
         {% endif %}
       </div>
 
-      <p>Cooking Time: {{ recipe.cooking_time }} minutes</p>
-      <p>Difficulty: {{ recipe.difficulty }}</p>
+      <!-- Centered Cooking Time and Difficulty -->
+      <div class="recipe-meta">
+        <p>Cooking Time: {{ recipe.cooking_time }} minutes</p>
+        <p>Difficulty: {{ recipe.difficulty }}</p>
+      </div>
 
-      <h3>Ingredients:</h3>
-      <ul>
-        {% for ingredient in recipe.ingredient_set.all %}
-        <li>
-          {{ ingredient.quantity }} {{ ingredient.unit }} {{ ingredient.name }}
-        </li>
-        {% endfor %}
-      </ul>
+      <!-- Ingredients Container -->
+      <div class="ingredients-container">
+        <h3>Ingredients:</h3>
+        <ul>
+          {% for ingredient in recipe.ingredient_set.all %}
+          <li class="ingredient-item">
+            <div class="ingredient-name">{{ ingredient.name }}</div>
+            <div class="ingredient-quantity">{{ ingredient.quantity }}</div>
+            <div class="ingredient-unit">{{ ingredient.unit }}</div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
 
       <h3>Instructions:</h3>
       <p>{{ recipe.instructions }}</p>

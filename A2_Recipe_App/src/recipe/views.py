@@ -6,6 +6,7 @@ from .models import Recipe
 class RecipeDetailView(DetailView):
     model = Recipe
     template_name = "recipe/recipe_detail.html"  # Update the template name
+    context_object_name = "recipe"
 
 
 class RecipeListView(ListView):
@@ -15,7 +16,8 @@ class RecipeListView(ListView):
 
 
 def home(request):
-    return render(request, "recipe/home.html", {"recipe": recipe_list})
+    recipes = Recipe.objects.all()  # Fetch all recipes
+    return render(request, "recipe/home.html", {"recipes": recipes})
 
 
 def recipe_list(request):
@@ -23,5 +25,6 @@ def recipe_list(request):
     return render(request, "recipes.html", {"recipes": recipes})
 
 
-def recipe_detail(request):
-    return render(request, "recipe/recipe_detail.html")
+def recipe_detail(request, pk):
+    recipe = get_object_or_404(Recipe, pk=pk)
+    return render(request, "recipe/recipe_detail.html", {"recipe": recipe})
