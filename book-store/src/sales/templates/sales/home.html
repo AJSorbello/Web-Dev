@@ -1,12 +1,31 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html>
-  <title>Book's Home</title>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book's Home</title>
+    <style>
+      body {
+        text-align: center;
+      }
+      .login-button {
+        display: inline-block;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
   <body>
-    <h1 style="text-align: center">Welcome to our Bookstore</h1>
+    <div class="login-button">
+      <a href="{% url 'login' %}">Login</a>
+      {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}">Logout</a>
+      {% endif %}
+    </div>
+    <h1>Welcome to our Bookstore</h1>
     <br />
-    <div style="text-align: center">
+    <div>
       <img
         src="{% static 'sales/images/bookstore.jpg' %}"
         alt="home"
