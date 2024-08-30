@@ -251,30 +251,62 @@ header h1 {
     font-size: 1.1em;
     color: #333;
 }
+.ingredient-name-container {
+    font-size: 1.2em;
+    font-weight: bold;
+    flex-grow: 2; /* Make the name container take more space */
+    text-align: left; /* Align text to the left */
+    margin-right: 10px; /* Space between name and quantity/unit */
+}
 
+.ingredient-quantity-unit-container {
+    font-size: 1.1em;
+    flex-grow: 1; /* Allow this container to take less space */
+    text-align: right; /* Align text to the right */
+}
 .ingredient-item {
     margin-bottom: 20px; /* Space between each ingredient */
     padding-left: 0; /* Align to the left edge */
 }
-
 .ingredient-wrapper {
     background-color: #f9f9f9; /* Light background for the ingredient wrapper */
     border-radius: 6px;
     padding: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+    margin: 0 20px 10px 20px; /* Add left and right margin for inner spacing */
+    display: flex; /* Flexbox to align name and quantity/unit containers */
+    justify-content: space-between; /* Space out the name and quantity/unit */
+}
+
+.ingredient-details {
+    font-size: 1.1em;
+    text-align: center; /* Center the text */
+    font-weight: bold;
 }
 
 .ingredient-name,
 .ingredient-quantity,
 .ingredient-unit {
-    display: block; /* Ensure each piece of information is on its own line */
-    margin-bottom: 5px; /* Space between lines in the same ingredient */
+    margin-bottom: 5px;
     font-weight: normal;
+    flex-basis: 100%; /* Each element takes full width on small screens */
+    text-align: center; /* Center the text */
 }
 
 .ingredient-name {
     font-weight: bold; /* Make the name stand out */
+    font-size: 1.2em;
 }
+
+@media (min-width: 600px) {
+    .ingredient-quantity,
+    .ingredient-unit,
+    .ingredient-name {
+        flex-basis: auto; /* Revert to auto width on larger screens */
+        text-align: left; /* Align text to the left on larger screens */
+    }
+}
+
 
 .ingredient-quantity::before {
     content: "Quantity: ";
