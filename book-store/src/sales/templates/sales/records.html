@@ -22,16 +22,17 @@
                             {{ form }}
                             <button type="submit" class="btn btn-primary">Search</button>
                         </form>
+                        <br>
                         {% if error_message %}
                             <div class="alert alert-danger mt-3">{{ error_message }}</div>
                         {% endif %}
-                        {% if queryset %}
+                        {% if sales_df %}
                             <h2>Search Results</h2>
-                            <ul>
-                                {% for sale in queryset %}
-                                    <li>{{ sale }}</li>
-                                {% endfor %}
-                            </ul>
+                            {{ sales_df|safe }}
+                            <br>
+                            <img src="data:image/png;base64,{{ chart|safe }}">
+                        {% else %}
+                            <h3>No data</h3>
                         {% endif %}
                     </div>
                 </div>
