@@ -1,19 +1,13 @@
-from django.shortcuts import render  # imported by default
-from django.views.generic import ListView, DetailView  # to display lists
+from django.shortcuts import render, get_object_or_404
 from .models import Book  # to access Book model
-#to protect class-based view
-from django.contrib.auth.mixins import LoginRequiredMixin
 
-# Create your views here.
-class BookListView(LoginRequiredMixin, ListView):     #class-based “protected” view
-    model = Book                                    #specify model
-    template_name = 'books/main.html'               #specify template
+def book_list(request):
+    books = Book.objects.all()
+    return render(request, 'books/main.html', {'object_list': books})
 
-
-class BookDetailView(LoginRequiredMixin, DetailView):   #class-based “protected” view
-    model = Book                                    #specify model
-    template_name = 'books/detail.html'             #specify template
-
+def book_detail(request, pk):
+    book = get_object_or_404(Book, pk=pk)
+    return render(request, 'books/detail.html', {'object': book})
 
 # Create your views here.
 def home(request):

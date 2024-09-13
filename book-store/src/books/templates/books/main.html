@@ -1,55 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Books' List</title>
-    <style>
-      body {
-        text-align: center;
-        font-family: Arial, sans-serif;
-      }
-      table {
-        margin: 0 auto;
-        border-collapse: collapse;
-      }
-      th, td {
-        border: 1px solid black;
-        padding: 5px;
-      }
-      .logout-button {
-        display: inline-block;
-        margin-top: 20px;
-      }
-    </style>
-  </head>
-  <body>
+{% extends "base.html" %}
+{% load static %}
+{% block title %}List of Books{% endblock %}
+
+{% block content %}
     <h1>Books' List</h1>
-    {% comment %} HTML tag for heading {% endcomment %}
-    
     <div class="logout-button">
-      <a href="{% url 'logout' %}">Logout</a>
+        <a href="{% url 'logout' %}">Logout</a>
     </div>
-    
     <table>
-      {% comment %} start of table {% endcomment %}
-      <tr>
-        <th>Books' Titles</th>
-        <th>Books' Images</th>
-      </tr>
-      {% for object in object_list %}
-      {% comment %} now go through the list element-by-element {% endcomment %}
-      <tr>
-        <td>
-          <a href="{{ object.get_absolute_url }}">
-            {% comment %} add links to book names {% endcomment %} {{ object.name }}
-          </a>
-        </td>
-        <td>
-          <img src="{{ object.pic.url }}" width="150" height="200" alt="{{ object.name }}" />
-        </td>
-      </tr>
-      {% endfor %}
+        <tr>
+            <th>Books' Titles</th>
+            <th>Books' Images</th>
+        </tr>
+        {% for book in object_list %}
+        <tr>
+            <td>
+                <a href="{% url 'books:detail' book.pk %}">
+                    {{ book.name }}
+                </a>
+            </td>
+            <td>
+                <img src="{{ book.pic.url }}" width="150" height="200" alt="{{ book.name }}" />
+            </td>
+        </tr>
+        {% endfor %}
     </table>
-  </body>
-</html>
+{% endblock %}
